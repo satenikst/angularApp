@@ -3,12 +3,12 @@
  */
 var express = require('express');
 var app = express();
+app.set('port', (process.env.PORT || 3000));
 app.use(express.static('public'));
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://Sisi:823543st@ds031167.mlab.com:31167/sisi');
 var bodyParser = require('body-parser');
 app.use( bodyParser.json() );
-
 var User = mongoose.model('User', {
     firstName:String,
     lastName:String,
@@ -38,7 +38,6 @@ app.post('/', function(req, res){
     console.log(user);
 });
 
-
-http.listen(process.env.PORT || 3000, function(){
-    console.log('listening on', http.address().port);
-});
+app.listen(app.get('port'), function(){
+    console.log('listening on', app.get('port'))
+})
